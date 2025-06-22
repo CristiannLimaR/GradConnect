@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as skillController from "./skill.controller.js";
-import { validateFields } from "../middlewares/validateFields.js";
+import { validateFields } from "../middlewares/validate-fields.js";
 import { check } from "express-validator";
 
 const router = Router();
