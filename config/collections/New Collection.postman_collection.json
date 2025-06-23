@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "68d8069b-dc2b-44ca-9267-b73ee93d4f00",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37414058"
+	},
+	"item": [
+		{
+			"name": "experiencia",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODU4ZDY4OGZlMDAyZWE0ZjQ1NTY3YTAiLCJpYXQiOjE3NTA2NTc4ODgsImV4cCI6MTc1MDY2MTQ4OH0.aXkR2LjDflnwGck7oH87t1boyuCiH9VI2ngOU0OydMM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"user\": \"6858d688fe002ea4f45567a0\",\r\n  \"title\": \"Estudiante \",\r\n  \"company\": \"60d0fe4f5311236168a109cb\",\r\n  \"startDate\": \"2020-01-15\",\r\n  \"endDate\": \"2023-12-31\",\r\n  \"description\": \"Desarrollo de apps web con react, js y node js\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/gradConnect/v1/experience/save/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"gradConnect",
+						"v1",
+						"experience",
+						"save",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\":\"Diego\",\r\n  \"lastName\":\"Lopes\",\r\n  \"email\": \"diegoe@xample.com\",\r\n  \"password\": \"12345678\",\r\n  \"role\": \"CANDIDATE\",\r\n  \"location\": \"Guatemala\",\r\n  \"phone\": \"54567890\",\r\n  \"profilePhoto\": \"https://example.com/profile-photo.jpg\",\r\n  \"summary\": \"Experienced software engineer with a passion for building scalable web applications.\",\r\n  \"linkedinUrl\": \"https://www.linkedin.com/in/johndoe\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/gradConnect/v1/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"gradConnect",
+						"v1",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"john@example.com\",\r\n  \"password\": \"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/gradConnect/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"gradConnect",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editar experiencia ",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODU4ZDY4OGZlMDAyZWE0ZjQ1NTY3YTAiLCJpYXQiOjE3NTA2NTc4ODgsImV4cCI6MTc1MDY2MTQ4OH0.aXkR2LjDflnwGck7oH87t1boyuCiH9VI2ngOU0OydMM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"user\": \"6858d688fe002ea4f45567a0\",\r\n  \"title\": \"Estudiante junior programador\",\r\n  \"company\": \"60d0fe4f5311236168a109cb\",\r\n  \"startDate\": \"2020-01-19\",\r\n  \"endDate\": \"2023-12-31\",\r\n  \"description\": \"Desarrollo de apps \"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/gradConnect/v1/experience/update/6858ec8bf792ba70fca84e75",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"gradConnect",
+						"v1",
+						"experience",
+						"update",
+						"6858ec8bf792ba70fca84e75"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "eliminar experiencia",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODU4ZDY4OGZlMDAyZWE0ZjQ1NTY3YTAiLCJpYXQiOjE3NTA2NTc4ODgsImV4cCI6MTc1MDY2MTQ4OH0.aXkR2LjDflnwGck7oH87t1boyuCiH9VI2ngOU0OydMM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/gradConnect/v1/experience/delete/6858ec8bf792ba70fca84e75",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"gradConnect",
+						"v1",
+						"experience",
+						"delete",
+						"6858ec8bf792ba70fca84e75"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

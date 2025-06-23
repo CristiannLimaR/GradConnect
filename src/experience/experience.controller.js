@@ -78,6 +78,8 @@ export const updateExperience = async (req, res) => {
 export const deleteExperience = async (req, res) => {
     try {
         const { id } = req.params;
+        console.log("Intentando eliminar experiencia con ID:", id);
+
 
         const deleteExperience = await Experience.findByIdAndDelete(id);
 
