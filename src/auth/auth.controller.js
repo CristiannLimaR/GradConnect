@@ -43,8 +43,8 @@ export const login = async (req, res) => {
 export const register = async (req, res) => {
   try {
     const {
-      name,
-      surname,
+      firstName, 
+      lastName,
       email,
       password,
       role = "CANDIDATE",
@@ -58,8 +58,8 @@ export const register = async (req, res) => {
     const encryptedPassword = await hash(password);
 
     const newUser = await User.create({
-      name,
-      surname,
+      firstName,
+      lastName,
       email: email.toLowerCase().trim(),
       password: encryptedPassword,
       role,

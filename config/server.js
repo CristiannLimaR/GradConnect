@@ -5,6 +5,7 @@ import morgan from "morgan";
 import { dbConnection } from "./mongo.js";
 import userRoutes from '../src/users/user.routes.js';
 import authRoutes from '../src/auth/auth.routes.js'
+import experienRoutes from '../src/experience/experience.routes.js';
 
 const middlewares = (app) => {
   app.use(express.urlencoded({ extended: false }));
@@ -17,7 +18,7 @@ const middlewares = (app) => {
 const routes = (app) => {
     app.use("/gradConnect/v1/auth", authRoutes);
     app.use("/gradConnect/v1/user", userRoutes);
-
+    app.use("/gradConnect/v1/experience", experienRoutes);
 }
 const conectarDb = async () => {
   try {
