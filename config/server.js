@@ -4,6 +4,10 @@ import helmet from "helmet";
 import morgan from "morgan";
 import { dbConnection } from "./mongo.js";
 
+import userRoutes from '../src/users/user.routes.js';
+import authRoutes from '../src/auth/auth.routes.js';
+import jobApplicationRoutes from '../src/JobApplication/jobApplication.routes.js';
+
 const middlewares = (app) => {
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
@@ -12,7 +16,11 @@ const middlewares = (app) => {
   app.use(morgan("dev"));
 };
 
-const routes = (app) => {};
+const routes = (app) => {
+  app.use("/gradConnect/v1/auth", authRoutes);
+  app.use("/gradConnect/v1/user", userRoutes);
+  app.use("/gradConnect/v1/solicitudes", jobApplicationRoutes);
+};
 
 const conectarDb = async () => {
   try {
