@@ -44,11 +44,6 @@ const userSchema = new Schema(
       type: String, // URL
       trim: true
     },
-    summary: {
-      type: String,
-      trim: true,
-      maxLength: 1000
-    },
     linkedinUrl: {
       type: String,
       trim: true
@@ -56,6 +51,10 @@ const userSchema = new Schema(
     registrationDate: {
       type: Date,
       default: Date.now
+    },
+    cvAdjunto: {
+      type: String,
+      trim: true
     },
     status: {
       type: Boolean,

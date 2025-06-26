@@ -2,15 +2,16 @@ import Experience from "./experience.model.js";
 
 export const saveExperience = async (req, res) => {
     try {
-        const { title, company, startDate, endDate, description } = req.body;
+        const { title, company, startDate, endDate, description, isCurrent } = req.body;
 
         const newExperience = new Experience({
             user: req.user._id, 
             title,
             company,
             startDate,
-            endDate,
+            endDate: isCurrent ? null : endDate,
             description,
+            isCurrent: !!isCurrent,
         });
 
         const savedExperience = await newExperience.save();
@@ -53,11 +54,19 @@ export const getExperiences = async (req, res) => {
 export const updateExperience = async (req, res) => {
     try {
         const { id } = req.params;
-        const { user, title, company, startDate, endDate, description } = req.body;
+        const { user, title, company, startDate, endDate, description, isCurrent } = req.body;
 
         const updatedExperience = await Experience.findByIdAndUpdate(
             id,
-            { user, title, company, startDate, endDate, description },
+            {
+                user,
+                title,
+                company,
+                startDate,
+                endDate: isCurrent ? null : endDate,
+                description,
+                isCurrent: !!isCurrent,
+            },
             { new: true }
         );
 

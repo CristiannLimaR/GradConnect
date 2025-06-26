@@ -24,7 +24,11 @@ const experienceSchema = new Schema(
        },
        endDate: {
         type: Date,
-        required: [true, "End date is required"],
+        required: false,
+       },
+       isCurrent: {
+        type: Boolean,
+        default: false,
        },
        description: {
         type: String,
