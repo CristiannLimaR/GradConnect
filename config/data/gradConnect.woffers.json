@@ -1,0 +1,160 @@
+[{
+  "_id": {
+    "$oid": "685888ef0b9c1a9014e81f5c"
+  },
+  "title": "Desarrollador Backend",
+  "description": "Responsable de desarrollar y mantener servicios API.",
+  "company": "Empresa Ficticia S.A.",
+  "location": "Remoto",
+  "modality": "Tiempo Completo",
+  "salary": 8000,
+  "ubication": "Ciudad de Guatemala",
+  "requirements": [
+    "Node.js",
+    "MongoDB",
+    "Git"
+  ],
+  "closingDate": {
+    "$date": "2025-08-01T00:00:00.000Z"
+  },
+  "skills": [
+    {
+      "$oid": "665f70d0a7ad35481a36f151"
+    },
+    {
+      "$oid": "665f70d0a7ad35481a36f152"
+    }
+  ],
+  "applications": [
+    {
+      "$oid": "665f70d0a7ad35481a36f199"
+    }
+  ],
+  "status": true,
+  "createdAt": {
+    "$date": "2025-06-22T22:51:27.142Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-22T22:51:27.142Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "68588b4dc141d507cff071c0"
+  },
+  "title": "Profesor de Taller PERO EDITADOOO",
+  "description": "Responsable de dar clases de programación.",
+  "company": "Kinal S.A.",
+  "location": "Presencial",
+  "modality": "Tiempo Completo",
+  "salary": 8000,
+  "ubication": "Ciudad de Guatemala",
+  "requirements": [
+    "Node.js",
+    "MongoDB",
+    "Git"
+  ],
+  "closingDate": {
+    "$date": "2025-08-01T00:00:00.000Z"
+  },
+  "skills": [
+    {
+      "$oid": "665f70d0a7ad35481a36f151"
+    },
+    {
+      "$oid": "665f70d0a7ad35481a36f152"
+    }
+  ],
+  "applications": [
+    {
+      "$oid": "665f70d0a7ad35481a36f199"
+    }
+  ],
+  "status": true,
+  "createdAt": {
+    "$date": "2025-06-22T23:01:33.477Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-22T23:34:36.712Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "685896742008c8ea3a8dd58f"
+  },
+  "title": "Profesor de Literatura",
+  "description": "Responsable de dar clases de literatura",
+  "company": "Kinal S.A.",
+  "location": "Presencial",
+  "modality": "Tiempo Completo",
+  "salary": 8000,
+  "ubication": "Ciudad de Guatemala",
+  "requirements": [
+    "Node.js",
+    "MongoDB",
+    "Git"
+  ],
+  "closingDate": {
+    "$date": "2025-08-01T00:00:00.000Z"
+  },
+  "skills": [
+    {
+      "$oid": "665f70d0a7ad35481a36f151"
+    },
+    {
+      "$oid": "665f70d0a7ad35481a36f152"
+    }
+  ],
+  "applications": [
+    {
+      "$oid": "665f70d0a7ad35481a36f199"
+    }
+  ],
+  "status": false,
+  "createdAt": {
+    "$date": "2025-06-22T23:49:08.295Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-22T23:49:36.922Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "685898b558f187cd052bb59b"
+  },
+  "title": "Profesor de Psicología",
+  "description": "Responsable de dar clases de psicologia",
+  "company": "Kinal S.A.",
+  "location": "Presencial",
+  "modality": "Tiempo Completo",
+  "salary": 8000,
+  "ubication": "Ciudad de Guatemala",
+  "requirements": [
+    "Node.js",
+    "MongoDB",
+    "Git"
+  ],
+  "closingDate": {
+    "$date": "2025-08-01T00:00:00.000Z"
+  },
+  "skills": [
+    {
+      "$oid": "665f70d0a7ad35481a36f151"
+    },
+    {
+      "$oid": "665f70d0a7ad35481a36f152"
+    }
+  ],
+  "applications": [
+    {
+      "$oid": "665f70d0a7ad35481a36f199"
+    }
+  ],
+  "status": false,
+  "createdAt": {
+    "$date": "2025-06-22T23:58:45.739Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-22T23:59:02.617Z"
+  }
+}]
