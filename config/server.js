@@ -6,6 +6,7 @@ import { dbConnection } from "./mongo.js";
 import userRoutes from "../src/users/user.routes.js";
 import authRoutes from "../src/auth/auth.routes.js";
 import wOfferRoutes from "../src/workOffer/wOffer.routes.js";
+import experienRoutes from '../src/experience/experience.routes.js';
 
 const middlewares = (app) => {
   app.use(express.urlencoded({ extended: false }));
@@ -19,7 +20,9 @@ const routes = (app) => {
   app.use("/gradConnect/v1/auth", authRoutes);
   app.use("/gradConnect/v1/user", userRoutes);
   app.use("/gradConnect/v1/wOffer", wOfferRoutes);
+  app.use("/gradConnect/v1/experience", experienRoutes);
 };
+
 const conectarDb = async () => {
   try {
     await dbConnection();
@@ -42,30 +45,3 @@ export const initServer = () => {
   });
 };
 
-// const crearAdmin = async () => {
-//   try {
-//     const existingAdmin = await User.findOne({ username: "ADMINB" });
-
-//     if (!existingAdmin) {
-//       const hashedPassword = await hash("ADMINB");
-
-//       const admin = await User.create({
-//         name: "Default Admin",
-//         username: "ADMINB",
-//         dpi: 1234567890,
-//         address: "Admin HQ",
-//         phone: 1234567890,
-//         email: "adminb@adminb.com",
-//         password: hashedPassword,
-//         monthlyIncome: 999999,
-//         role: "ADMIN_ROLE",
-//       });
-
-//       console.log("✅ Admin creado correctamente:", admin.username);
-//     } else {
-//       console.log("ℹ️ Admin ya existe");
-//     }
-//   } catch (error) {
-//     console.error(`❌ Error al crear admin: ${error.message}`);
-//   }
-// };
