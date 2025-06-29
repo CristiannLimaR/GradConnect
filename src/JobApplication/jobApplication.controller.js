@@ -1,5 +1,5 @@
 import JobApplication from './jobApplication.model.js';
-import User from '../users/user.model.js';
+
 
 export const createJobApplication = async (req, res) => {
   try {

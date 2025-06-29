@@ -8,8 +8,6 @@ import authRoutes from "../src/auth/auth.routes.js";
 import wOfferRoutes from "../src/workOffer/wOffer.routes.js";
 import experienRoutes from '../src/experience/experience.routes.js';
 import educationRoutes from '../src/education/education.routes.js';
-import userRoutes from '../src/users/user.routes.js';
-import authRoutes from '../src/auth/auth.routes.js';
 import jobApplicationRoutes from '../src/JobApplication/jobApplication.routes.js';
 
 const middlewares = (app) => {
@@ -45,6 +43,15 @@ export const initServer = () => {
   middlewares(app);
   routes(app);
   conectarDb();
+
+  // Middleware global de manejo de errores
+  app.use((err, req, res, next) => {
+    console.error('Error:', err); // Muestra el error completo en consola
+    res.status(500).json({
+      error: err.message || err.toString(),
+      details: err.stack || err
+    });
+  });
 
   app.listen(port, () => {
     console.log(`🚀 Server running on port ${port}`);

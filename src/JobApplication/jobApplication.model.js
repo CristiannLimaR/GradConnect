@@ -30,4 +30,4 @@ const jobApplicationSchema = new mongoose.Schema({
 
 jobApplicationSchema.plugin(autopopulate);
 
-module.exports = mongoose.model('JobApplication', jobApplicationSchema);
+export default mongoose.model('JobApplication', jobApplicationSchema);

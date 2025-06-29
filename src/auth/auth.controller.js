@@ -13,26 +13,15 @@ export const login = async (req, res) => {
     return res.status(200).json({
       success: true,
       msg: "Successful login",
-      userDetails: {
-        token,
-        uId: user.id,
-        name: user.name,
-        surname: user.surname,
-        role: user.role,
-        location: user.location,
-        phone: user.phone,
-        profileImage: user.profileImage,
-        summary: user.summary,
-        linkedinUrl: user.linkedinUrl
-      }
+      user,
+      token,
     });
-
   } catch (e) {
     console.error(e);
     return res.status(500).json({
       success: false,
       msg: "Server error",
-      error: e.message
+      error: e.message,
     });
   }
 };
@@ -41,21 +30,27 @@ export const login = async (req, res) => {
  * Controlador para registro
  */
 export const register = async (req, res) => {
+  console.log("Registro");
   try {
+    console.log("Archivo recibido:", req.file);
     const {
-      firstName, 
+      firstName,
       lastName,
       email,
       password,
       role = "CANDIDATE",
       location,
       phone,
-      profileImage,
-      summary,
-      linkedinUrl
+      profilePhoto,
     } = req.body;
+    console.log(req.body);
 
     const encryptedPassword = await hash(password);
+
+    let profileImageUrl = profilePhoto;
+    if (req.file && req.file.path) {
+      profileImageUrl = req.file.path;
+    }
 
     const newUser = await User.create({
       firstName,
@@ -65,9 +60,7 @@ export const register = async (req, res) => {
       role,
       location,
       phone,
-      profileImage,
-      summary,
-      linkedinUrl
+      profilePhoto: profileImageUrl,
     });
 
     return res.status(201).json({
@@ -81,18 +74,18 @@ export const register = async (req, res) => {
         role: newUser.role,
         location: newUser.location,
         phone: newUser.phone,
-        profileImage: newUser.profileImage,
-        summary: newUser.summary,
-        linkedinUrl: newUser.linkedinUrl
-      }
+        profilePhoto: newUser.profilePhoto,
+      },
     });
-
   } catch (error) {
-    console.error(error);
+    console.error(
+      "Error en registro:",
+      JSON.stringify(error, Object.getOwnPropertyNames(error), 2)
+    );
     return res.status(500).json({
       success: false,
       msg: "User registration failed",
-      error: error.message
+      error: error.message,
     });
   }
 };
