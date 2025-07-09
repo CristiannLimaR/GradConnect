@@ -33,9 +33,9 @@ export const saveExperience = async (req, res) => {
 
 export const getExperiences = async (req, res) => {
     try {
-        const experiences = await Experience.find()
-            .populate("user")
-            .populate("company", "name");
+        const userId = req.user._id;
+
+        const experiences = await Experience.find({ user: userId }).sort({ startDate: -1 });
 
         res.status(200).json({
             success: true,
@@ -50,6 +50,7 @@ export const getExperiences = async (req, res) => {
         });
     }
 };
+
 
 export const updateExperience = async (req, res) => {
     try {
@@ -88,7 +89,6 @@ export const deleteExperience = async (req, res) => {
     try {
         const { id } = req.params;
         console.log("Intentando eliminar experiencia con ID:", id);
-
 
         const deleteExperience = await Experience.findByIdAndDelete(id);
 

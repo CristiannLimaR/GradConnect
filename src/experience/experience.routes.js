@@ -15,6 +15,7 @@ router.post(
 
 router.get(
     "/",
+    validateJWT, // 🔒 Protege la ruta
     getExperiences
 )
 

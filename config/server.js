@@ -18,6 +18,7 @@ const middlewares = (app) => {
   app.use(morgan("dev"));
 };
 
+
 const routes = (app) => {
   app.use("/gradConnect/v1/auth", authRoutes);
   app.use("/gradConnect/v1/user", userRoutes);
@@ -38,7 +39,7 @@ const conectarDb = async () => {
 
 export const initServer = () => {
   const app = express();
-  const port = process.env.PORT || 3002;
+  const port = process.env.PORT || 3000;
 
   middlewares(app);
   routes(app);
