@@ -56,6 +56,10 @@ const wOfferSchema = new Schema(
         autopopulate: true,
       },
     ],
+    isApplicated: {
+      type: Boolean,
+      default: false,
+    },
     status: {
       type: Boolean,
       default: true,
