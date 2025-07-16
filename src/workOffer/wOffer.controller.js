@@ -56,9 +56,15 @@ export const getWOffers = async (req, res) => {
     const { query } = { status: true };
     const offers = await wOffer.find(query);
 
+    // Mapear las ofertas para incluir la cantidad de aplicaciones
+    const offersWithApplicationsCount = offers.map((offer) => ({
+      ...offer.toObject(), // Convertir a objeto para evitar problemas con Mongoose
+      applicationsCount: offer.applications.length,
+    }));
+
     res.status(200).json({
       msg: "Work Offers fetched successfully.",
-      offers,
+      offers: offersWithApplicationsCount,
     });
   } catch (e) {
     return res.status(500).json({
@@ -87,9 +93,14 @@ export const searchWOffer = async (req, res) => {
       });
     }
 
+    // Mapear las ofertas para incluir la cantidad de aplicaciones
+    const offersWithApplicationsCount = {
+      ...offer.toObject(), // Convertir a objeto para evitar problemas con Mongoose
+      applicationsCount: offer.applications.length,
+    }
     res.status(200).json({
       msg: "Work Offer found successfully.",
-      offer,
+      offer: offersWithApplicationsCount,
     });
   } catch (e) {
     return res.status(500).json({
