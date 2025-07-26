@@ -4,6 +4,7 @@ import { updateUser, deleteUser, updatedPassword, getUsers } from "./user.contro
 import { validateFields } from '../middlewares/validate-fields.js'; 
 import { validateUserDelete, validatePasswordUpdate, validateUpdateUser } from "../middlewares/validate-user.js";
 import { validateJWT } from "../middlewares/validate-jwt.js";
+import upload from "../middlewares/upload.js";
 
 const router = Router();
 
@@ -32,7 +33,8 @@ router.put(
         validateJWT,
         check("id", "id is invalid").isMongoId(),
         validateUpdateUser,
-        validateFields
+        validateFields,
+        upload.single('cvAdjunto')
     ],
     updateUser
 )

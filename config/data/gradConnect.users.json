@@ -1,0 +1,48 @@
+[{
+  "_id": {
+    "$oid": "6858d688fe002ea4f45567a0"
+  },
+  "firstName": "Josue",
+  "lastName": "yax",
+  "email": "john@example.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$LuzCukd1MpxiwNMmLmWBhA$UbFX5ZrbixRC3PfjuWYZaOwmom2sNYb0hwVo3/hTr+8",
+  "role": "CANDIDATE",
+  "location": "Guatemala",
+  "phone": "54567890",
+  "summary": "Experienced software engineer with a passion for building scalable web applications.",
+  "linkedinUrl": "https://www.linkedin.com/in/johndoe",
+  "status": true,
+  "registrationDate": {
+    "$date": "2025-06-23T04:22:32.276Z"
+  },
+  "createdAt": {
+    "$date": "2025-06-23T04:22:32.281Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-23T04:22:32.281Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6858d99ea75f0b0717e0d20c"
+  },
+  "firstName": "Diego",
+  "lastName": "Lopes",
+  "email": "diegoe@xample.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$bnFMysVuTlHNb3U4RrLcdw$25cKlrr62S2Q6ClAMpQjTZPuXwZK567LwqxKdd+E7GQ",
+  "role": "CANDIDATE",
+  "location": "Guatemala",
+  "phone": "54567890",
+  "summary": "Experienced software engineer with a passion for building scalable web applications.",
+  "linkedinUrl": "https://www.linkedin.com/in/johndoe",
+  "status": true,
+  "registrationDate": {
+    "$date": "2025-06-23T04:35:42.335Z"
+  },
+  "createdAt": {
+    "$date": "2025-06-23T04:35:42.335Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-23T04:35:42.335Z"
+  }
+}]

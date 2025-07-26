@@ -20,12 +20,8 @@ const skillSchema = new Schema(
             required: true,
             autopopulate: true
         },
-        createdDate: {
-            type: Date,
-            default: Date.now
-        },
-        stauts:{
-            type: String,
+        status:{
+            type: Boolean,
             default: true
         }
     },
