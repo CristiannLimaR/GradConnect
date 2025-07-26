@@ -9,6 +9,8 @@ import wOfferRoutes from "../src/workOffer/wOffer.routes.js";
 import experienRoutes from '../src/experience/experience.routes.js';
 import educationRoutes from '../src/education/education.routes.js';
 import jobApplicationRoutes from '../src/JobApplication/jobApplication.routes.js';
+import enterpriseRoutes from '../src/enterprise/enterprise.routes.js';
+import skillRoutes from '../src/skills/skill.routes.js';
 
 const middlewares = (app) => {
   app.use(express.urlencoded({ extended: false }));
@@ -25,6 +27,8 @@ const routes = (app) => {
   app.use("/gradConnect/v1/experience", experienRoutes);
   app.use("/gradConnect/v1/solicitudes", jobApplicationRoutes);
   app.use("/gradConnect/v1/education", educationRoutes);
+  app.use("/gradConnect/v1/enterprise", enterpriseRoutes);
+  app.use("/gradConnect/v1/skills", skillRoutes);
 };
 
 const conectarDb = async () => {
