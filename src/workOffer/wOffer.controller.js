@@ -86,6 +86,7 @@ export const searchWOffer = async (req, res) => {
     }
 
     const offer = await wOffer.findById(id);
+    console.log("OFFER FROM DB:", offer);
 
     if (!offer) {
       return res.status(404).json({
@@ -214,3 +215,31 @@ export const deleteWOffer = async (req, res) => {
     });
   }
 };
+
+// Special gets
+export const getWOfferByRecuiter = async (req,res) => {
+  try {
+    const user = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(recuiterId)) {
+      return res.status(400).json({
+        msg: "Invalid recruiter ID format.",
+      });
+    }
+    if (user.role !== "RECRUITER") {
+      return res.status(403).json({
+        msg: "Only recuiters can access this endpoint."
+      })
+    }
+
+    const workOffers = await wOffer.find()
+
+
+  } catch (error) {
+    return res.status(500).json({
+      msg: "Error getting work offers by recruiter",
+      error: error.message,
+    });
+    
+  }
+}

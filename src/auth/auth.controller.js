@@ -45,7 +45,7 @@ export const register = async (req, res) => {
     } = req.body;
     console.log(req.body);
 
-    const encryptedPassword = await hash(password);
+    const encryptedPassword = await hash(String(password));
 
     let profileImageUrl = profilePhoto;
     if (req.file && req.file.path) {
