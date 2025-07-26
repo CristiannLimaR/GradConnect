@@ -6,7 +6,7 @@ export const saveWOffer = async (req, res) => {
     let {
       title,
       description,
-      company,
+      enterprise,
       location,
       modality,
       salary,
@@ -26,7 +26,7 @@ export const saveWOffer = async (req, res) => {
     const newOffer = new wOffer({
       title,
       description,
-      company,
+      enterprise,
       location,
       modality,
       salary,
@@ -132,7 +132,7 @@ export const updateWOffer = async (req, res) => {
     let {
       title,
       description,
-      company,
+      enterprise,
       location,
       modality,
       salary,
@@ -154,7 +154,7 @@ export const updateWOffer = async (req, res) => {
       {
         title,
         description,
-        company,
+        enterprise,
         location,
         modality,
         salary,

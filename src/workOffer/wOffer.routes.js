@@ -4,7 +4,8 @@ import { saveWOffer, getWOffers, searchWOffer, updateWOffer, deleteWOffer } from
 import { validateFields } from '../middlewares/validate-fields.js'; 
 import { validateJWT } from "../middlewares/validate-jwt.js";
 import { haveRol } from "../middlewares/validate-role.js"
-import {validateDate} from "../middlewares/validate-date.js"
+import { validateDate } from "../middlewares/validate-date.js"
+import {isRecruiter} from "../middlewares/recruiter-valitate.js"
 
 const router = Router()
 
@@ -14,8 +15,8 @@ router.get("/search/:id",searchWOffer)
 router.post(
     "/save",
     [
-        //validateJWT,
-        //haveRol,
+        validateJWT,
+        isRecruiter,
         validateFields,
         validateDate
     ],
@@ -25,8 +26,8 @@ router.post(
 router.put(
     "/update/:id",
     [
-        //validateJWT,
-        //haveRol,
+        validateJWT,
+        isRecruiter,
         validateFields,
         validateDate
     ],
@@ -36,8 +37,8 @@ router.put(
 router.delete(
     "/delete/:id",
     [
-        //validateJWT,
-        //haveRol,
+        validateJWT,
+        isRecruiter,
     ],
     deleteWOffer
 )
