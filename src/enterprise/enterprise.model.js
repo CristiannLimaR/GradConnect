@@ -53,7 +53,7 @@ const enterpriseSchema = new Schema(
     socialMediaLinks: [
       {
         type: String,
-        //match: /^(https?:\/\/)(www\.)?[\w\-]+\.[a-z]{2,}([\/\w\-.?=&#%]*)*$/i,
+        match: /^(https?:\/\/)(www\.)?[\w\-]+\.[a-z]{2,}([\/\w\-.?=&#%]*)*$/i,
       },
     ],
     type: {

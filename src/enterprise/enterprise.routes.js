@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { saveEnterprise, getEnterprises, getEnterpriseById, updateEnterprise, deleteEnterprise, addEnterpriseRecruiters, addSocialMediaLinks, getEnterpriseByRecruiter, getEnterpriseRecruiters } from "./enterprise.controller.js";
+import { saveEnterprise, getEnterprises, getEnterpriseById, updateEnterprise, deleteEnterprise, addEnterpriseRecruiters, addSocialMediaLinks, getEnterpriseByRecruiter, getEnterpriseRecruiters, removeEnterpriseRecruiters, removeSocialMediaLinks } from "./enterprise.controller.js";
 import { canSaveEnterprise, canGetEnterprises, canGetEnterpriseById, canUpdateEnterprise, canDeleteEnterprise } from "../middlewares/validate-enterprise.js";
 import { validateJWT } from "../middlewares/validate-jwt.js";
 import { haveRol } from "../middlewares/validate-role.js";
@@ -53,6 +53,18 @@ router.patch(
   validateJWT,
   haveRol("RECRUITER", "GRADCONNECT"),
   addSocialMediaLinks
+);
+router.delete(
+  "/:id/recruiters",
+  validateJWT,
+  haveRol("RECRUITER", "GRADCONNECT"),
+  removeEnterpriseRecruiters
+);
+router.delete(
+  "/:id/social-media",
+  validateJWT,
+  haveRol("RECRUITER", "GRADCONNECT"),
+  removeSocialMediaLinks
 );
 router.delete(
   "/:id",

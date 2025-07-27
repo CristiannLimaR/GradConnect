@@ -24,11 +24,13 @@ export const saveEnterprise = async (req, res) => {
       enterprise.recruiters.push(...recruiters);
     }
 
-    const links = Array.isArray(data.socialMediaLinks)
-      ? data.socialMediaLinks
-      : [data.socialMediaLinks];
-    if (links.length > 0){
-      enterprise.socialMediaLinks.push(...links);
+    if (data.socialMediaLinks) {
+      const links = Array.isArray(data.socialMediaLinks)
+        ? data.socialMediaLinks
+        : [data.socialMediaLinks];
+      if (links.length > 0){
+        enterprise.socialMediaLinks.push(...links);
+      }
     }
 
     await enterprise.save();
@@ -82,15 +84,16 @@ export const updateEnterprise = async (req, res) => {
     const { id } = req.params;
     const data = req.body;
 
+    
     if (data.recruiters) {
-      recruiters = Array.isArray(data.recruiters)
+      Array.isArray(data.recruiters)
         ? data.recruiters
         : [data.recruiters];
     }
     
-
+    
     if (data.socialMediaLinks) {
-      socialMediaLinks = Array.isArray(data.socialMediaLinks)
+      Array.isArray(data.socialMediaLinks)
         ? data.socialMediaLinks
         : [data.socialMediaLinks];
     }
@@ -132,6 +135,10 @@ export const addEnterpriseRecruiters = async (req, res) => {
       });
     }
 
+    recruiters = recruiters.filter(
+      r => !updatedEnterprise.recruiters.includes(r)
+    );
+
     if (recruiters.length > 0) {
       updatedEnterprise.recruiters.push(...recruiters);
 
@@ -149,6 +156,42 @@ export const addEnterpriseRecruiters = async (req, res) => {
     });
   }
 };
+
+export const removeEnterpriseRecruiters = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = req.body;
+    let recruiters = [];
+    if (data.recruiters) {
+      recruiters = Array.isArray(data.recruiters)
+        ? data.recruiters
+        : [data.recruiters];
+      delete data.recruiters;
+    }
+    const updatedEnterprise = await Enterprise.findById(id);
+    if (!updatedEnterprise) {
+      return res.status(404).json({
+        msg: "Enterprise not found.",
+      });
+    }
+    if (recruiters.length > 0) {
+      updatedEnterprise.recruiters = updatedEnterprise.recruiters.filter(
+        (recruiter) => !recruiters.includes(recruiter.toString())
+      );
+
+      await updatedEnterprise.save();
+    }
+    res.status(200).json({
+      msg: "Enterprise recruiters removed successfully.",
+      updatedEnterprise,
+    });
+  } catch (e) {
+    res.status(500).json({
+      msg: "Error removing enterprise recruiters.",
+      error: e.message,
+    });
+  }
+}
 
 export const addSocialMediaLinks = async (req, res) => {
   try {
@@ -171,6 +214,10 @@ export const addSocialMediaLinks = async (req, res) => {
       });
     }
 
+    socialMediaLinks = socialMediaLinks.filter(
+      link => !updatedEnterprise.socialMediaLinks.includes(link)
+    );
+
     if (socialMediaLinks.length > 0) {
       updatedEnterprise.socialMediaLinks.push(...socialMediaLinks);
 
@@ -184,6 +231,44 @@ export const addSocialMediaLinks = async (req, res) => {
   } catch (e) {
     res.status(500).json({
       msg: "Error updating social media links.",
+      error: e.message,
+    });
+  }
+};
+
+export const removeSocialMediaLinks = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = req.body;
+
+    let socialMediaLinks = [];
+    if (data.socialMediaLinks) {
+      socialMediaLinks = Array.isArray(data.socialMediaLinks)
+        ? data.socialMediaLinks
+        : [data.socialMediaLinks];
+      delete data.socialMediaLinks;
+    }
+
+    const updatedEnterprise = await Enterprise.findById(id);
+    if (!updatedEnterprise) {
+      return res.status(404).json({
+        msg: "Enterprise not found.",
+      });
+    }
+    if (socialMediaLinks.length > 0) {
+      updatedEnterprise.socialMediaLinks = updatedEnterprise.socialMediaLinks.filter(
+        (link) => !socialMediaLinks.includes(link)
+      );
+
+      await updatedEnterprise.save();
+    }
+    res.status(200).json({
+      msg: "Social media links removed successfully.",
+      updatedEnterprise,
+    });
+  } catch (e) {
+    res.status(500).json({
+      msg: "Error removing social media links.",
       error: e.message,
     });
   }
