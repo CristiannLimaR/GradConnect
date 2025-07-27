@@ -2,11 +2,11 @@ import Enterprise from "../enterprise/enterprise.model.js";
 import User from "../users/user.model.js";
 
 export const canSaveEnterprise = (req, res, next) => {
-    console.log("REQ.BODY EN MIDDLEWARE:", req.body); // <-- Esto te dará claridad
+    
 
-    const { name, address, contactNumber, email, type, size, /*recruiter,*/ industry, logo, description } = req.body;
+    const { name, address, contactNumber, email, type, size, recruiters, industry, logo, description } = req.body;
 
-    if (!name || !address || !contactNumber || !email || !type || !size || /*!adminId ||*/ !industry || !logo || !description) {
+    if (!name || !address || !contactNumber || !email || !type || !size || !recruiters || !industry || !logo || !description) {
         return res.status(400).json({
             success: false,
             msg: "All fields are required to create an enterprise."

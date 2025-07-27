@@ -24,11 +24,13 @@ export const saveEnterprise = async (req, res) => {
       enterprise.recruiters.push(...recruiters);
     }
 
-    const links = Array.isArray(data.socialMediaLinks)
-      ? data.socialMediaLinks
-      : [data.socialMediaLinks];
-    if (links.length > 0){
-      enterprise.socialMediaLinks.push(...links);
+    if (data.socialMediaLinks) {
+      const links = Array.isArray(data.socialMediaLinks)
+        ? data.socialMediaLinks
+        : [data.socialMediaLinks];
+      if (links.length > 0){
+        enterprise.socialMediaLinks.push(...links);
+      }
     }
 
     await enterprise.save();
@@ -82,15 +84,16 @@ export const updateEnterprise = async (req, res) => {
     const { id } = req.params;
     const data = req.body;
 
+    
     if (data.recruiters) {
-      recruiters = Array.isArray(data.recruiters)
+      Array.isArray(data.recruiters)
         ? data.recruiters
         : [data.recruiters];
     }
     
-
+    
     if (data.socialMediaLinks) {
-      socialMediaLinks = Array.isArray(data.socialMediaLinks)
+      Array.isArray(data.socialMediaLinks)
         ? data.socialMediaLinks
         : [data.socialMediaLinks];
     }

@@ -1,0 +1,197 @@
+{
+	"info": {
+		"_postman_id": "89c4689d-a0c3-4096-b589-8d074879b222",
+		"name": "GradConnect",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "37413966"
+	},
+	"item": [
+		{
+			"name": "Fetch enterprise",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": "{{baseURL}}/gradConnect/v1/enterprise/"
+			},
+			"response": []
+		},
+		{
+			"name": "search enterprise",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": "{{baseURL}}/gradConnect/v1/enterprise/68849ddbe9ff1bc70b35ebc3"
+			},
+			"response": []
+		},
+		{
+			"name": "post enterprise",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODg0NmJlYTllYWY1NWZkZDI4NGYxNDUiLCJpYXQiOjE3NTM1NzE1MjcsImV4cCI6MTc1MzU3NTEyN30.EXz6GelWZtoL3mnEY64mRC5wRvqt21QODuYfRk2GWY0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Sati*Magaña S.A.\",\r\n  \"description\": \"Empresa líder en soluciones tecnológicas para negocios de todos los tamaños.\",\r\n  \"logo\": \"https://techsolutions.com/logo.png\",\r\n  \"webSite\": \"https://techsolutions.com\",\r\n  \"address\": \"Av. Reforma 12-34, Zona 9, Ciudad de Guatemala\",\r\n  \"industry\": \"Technology\",\r\n  \"contactNumber\": \"+502 2211 3344\",\r\n  \"email\": \"contactoSanti2@techsolutions.com\",\r\n  \"type\": \"Corporation\",\r\n  \"size\": \"Medium\",\r\n  \"recruiters\": \"68846bea9eaf55fdd284f145\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseURL}}/gradConnect/v1/enterprise/"
+			},
+			"response": []
+		},
+		{
+			"name": "update enterprise",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODg0NmJlYTllYWY1NWZkZDI4NGYxNDUiLCJpYXQiOjE3NTM1NzE1MjcsImV4cCI6MTc1MzU3NTEyN30.EXz6GelWZtoL3mnEY64mRC5wRvqt21QODuYfRk2GWY0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Tecnofacil\",\r\n  \"description\": \"Empresa líder en soluciones tecnológicas para negocios de todos los tamaños.\",\r\n  \"logo\": \"https://techsolutions.com/logo.png\",\r\n  \"webSite\": \"https://tecnofacil.com\",\r\n  \"address\": \"Av. Reforma 12-34, Zona 9, Ciudad de Guatemala\",\r\n  \"industry\": \"Technology\",\r\n  \"contactNumber\": \"+502 2211 3344\",\r\n  \"type\": \"Corporation\",\r\n  \"size\": \"Medium\",\r\n  \"recruiters\": \"68846bea9eaf55fdd284f145\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseURL}}/gradConnect/v1/enterprise/6885619f6d77c4610c7aea5b"
+			},
+			"response": []
+		},
+		{
+			"name": "delete enterprise",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODg0NmJlYTllYWY1NWZkZDI4NGYxNDUiLCJpYXQiOjE3NTM1NzE1MjcsImV4cCI6MTc1MzU3NTEyN30.EXz6GelWZtoL3mnEY64mRC5wRvqt21QODuYfRk2GWY0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Tecno facil\",\r\n  \"description\": \"Empresa líder en soluciones tecnológicas para negocios de todos los tamaños.\",\r\n  \"logo\": \"https://techsolutions.com/logo.png\",\r\n  \"webSite\": \"https://tecnofacil.com\",\r\n  \"address\": \"Av. Reforma 12-34, Zona 9, Ciudad de Guatemala\",\r\n  \"industry\": \"Technology\",\r\n  \"contactNumber\": \"+502 2211 3344\",\r\n  \"email\": \"contacto3@techsolutions.com\",\r\n  \"type\": \"Corporation\",\r\n  \"size\": \"Medium\"\r\n}"
+				},
+				"url": "{{baseURL}}/gradConnect/v1/enterprise/68856da443fd23b33933bba7"
+			},
+			"response": []
+		},
+		{
+			"name": "buscar por reclutador",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODg0NmJlYTllYWY1NWZkZDI4NGYxNDUiLCJpYXQiOjE3NTM1NzE1MjcsImV4cCI6MTc1MzU3NTEyN30.EXz6GelWZtoL3mnEY64mRC5wRvqt21QODuYfRk2GWY0",
+						"type": "text"
+					}
+				],
+				"url": "{{baseURL}}/gradConnect/v1/enterprise/recruiter/68846bea9eaf55fdd284f145"
+			},
+			"response": []
+		},
+		{
+			"name": "buscar reclutadores",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODg0NmJlYTllYWY1NWZkZDI4NGYxNDUiLCJpYXQiOjE3NTM1NzE1MjcsImV4cCI6MTc1MzU3NTEyN30.EXz6GelWZtoL3mnEY64mRC5wRvqt21QODuYfRk2GWY0",
+						"type": "text"
+					}
+				],
+				"url": "{{baseURL}}/gradConnect/v1/enterprise/68849ddbe9ff1bc70b35ebc3/recruiters"
+			},
+			"response": []
+		},
+		{
+			"name": "añadir reclutadores",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODg0NmJlYTllYWY1NWZkZDI4NGYxNDUiLCJpYXQiOjE3NTM1NzE1MjcsImV4cCI6MTc1MzU3NTEyN30.EXz6GelWZtoL3mnEY64mRC5wRvqt21QODuYfRk2GWY0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"recruiters\":\"68846b389eaf55fdd284f140\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseURL}}/gradConnect/v1/enterprise/68849ddbe9ff1bc70b35ebc3/recruiters"
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODg0NmJlYTllYWY1NWZkZDI4NGYxNDUiLCJpYXQiOjE3NTM1NzE1MjcsImV4cCI6MTc1MzU3NTEyN30.EXz6GelWZtoL3mnEY64mRC5wRvqt21QODuYfRk2GWY0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"socialMediaLinks\":\"https://www.instagram.com/santiago_contreras8?utm_source=qr\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseURL}}/gradConnect/v1/enterprise/68849ddbe9ff1bc70b35ebc3/social-media"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:3000",
+			"type": "default"
+		}
+	]
+}
