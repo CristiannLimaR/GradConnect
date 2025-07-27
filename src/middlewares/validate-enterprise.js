@@ -2,7 +2,6 @@ import Enterprise from "../enterprise/enterprise.model.js";
 import User from "../users/user.model.js";
 
 export const canSaveEnterprise = (req, res, next) => {
-    console.log("REQ.BODY EN MIDDLEWARE:", req.body); // <-- Esto te dará claridad
 
     const { name, address, contactNumber, email, type, size, /*recruiter,*/ industry, logo, description } = req.body;
 
