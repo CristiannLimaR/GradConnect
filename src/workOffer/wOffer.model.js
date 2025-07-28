@@ -12,9 +12,8 @@ const wOfferSchema = new Schema(
       required: true,
     },
     enterprise: {
-      //type: [Schema.Types.ObjectId],
-      //ref: 'Enterprise',
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'Enterprise',
       required: true,
       autopopulate: true,
     },

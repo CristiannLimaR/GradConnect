@@ -1,4 +1,5 @@
 import wOffer from "./wOffer.model.js";
+import Enterprise from "../enterprise/enterprise.model.js";
 import mongoose from "mongoose";
 
 export const saveWOffer = async (req, res) => {
@@ -98,7 +99,7 @@ export const searchWOffer = async (req, res) => {
     const offersWithApplicationsCount = {
       ...offer.toObject(), // Convertir a objeto para evitar problemas con Mongoose
       applicationsCount: offer.applications.length,
-    }
+    };
     res.status(200).json({
       msg: "Work Offer found successfully.",
       offer: offersWithApplicationsCount,
@@ -211,6 +212,37 @@ export const deleteWOffer = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       msg: "Error deleting work offer",
+      error: error.message,
+    });
+  }
+};
+
+// Ofertas por empresa
+export const getOffersByEnterprise = async (req, res) => {
+  try {
+    const { enterpriseId } = req.params;
+
+    const idAsObject = new mongoose.Types.ObjectId(enterpriseId);
+
+    const offers = await wOffer
+      .find({
+        enterprise: enterpriseId,
+        status: true,
+      })
+      .populate("enterprise", "name"); // solo después del filtro
+
+    if (!offers || offers.length === 0) {
+      return res.status(404).json({
+        msg: "No offers found for this enterprise",
+      });
+    }
+    res.status(200).json({
+      msg: "Offers fetched successfully",
+      offers,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      msg: "Error getting offers by enterprise",
       error: error.message,
     });
   }
