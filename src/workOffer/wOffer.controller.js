@@ -222,8 +222,6 @@ export const getOffersByEnterprise = async (req, res) => {
   try {
     const { enterpriseId } = req.params;
 
-    const idAsObject = new mongoose.Types.ObjectId(enterpriseId);
-
     const offers = await wOffer
       .find({
         enterprise: enterpriseId,
