@@ -2,7 +2,7 @@ import { Router } from "express";
 import * as skillController from "./skill.controller.js";
 import { validateFields } from "../middlewares/validate-fields.js";
 import { check } from "express-validator";
-
+import { validateJWT } from "../middlewares/validate-jwt.js";
 const router = Router();
 
 // Route to create a new skill
@@ -13,7 +13,7 @@ router.post(
   [
     check('nameSkill', 'Skill name is required').not().isEmpty().trim().escape(),
     check('levelSkill', 'Invalid skill level').optional().isIn(['BEGINNER', 'INTERMEDIATE', 'ADVANCED']),
-    check('userId', 'User ID is required').not().isEmpty().isMongoId(),
+    validateJWT,
     validateFields
   ],
   skillController.createSkill
@@ -24,8 +24,7 @@ router.post(
 router.get(
   "/user/:userId",
    [
-      check('userId', 'User ID is required').not().isEmpty().isMongoId(),
-      check('userId', 'Valid User ID is required').isMongoId(),
+      validateJWT,
       validateFields
    ],
   skillController.getSkillsByUser
@@ -37,6 +36,7 @@ router.get(
   "/:skillId",
    [
       check('skillId', 'Valid Skill ID is required').isMongoId(),
+      validateJWT,
       validateFields
    ],
   skillController.getSkillById
@@ -51,7 +51,8 @@ router.put(
       check('skillId', 'Valid Skill ID is required').isMongoId(),
       check('nameSkill', 'Skill name must be a string').optional().isString().trim().escape(),
       check('levelSkill', 'Invalid skill level').optional().isIn(['BEGINNER', 'INTERMEDIATE', 'ADVANCED']),
-       validateFields
+      validateJWT,
+      validateFields
    ],
   skillController.updateSkill
 );
@@ -62,6 +63,7 @@ router.delete(
   "/:skillId",
    [
       check('skillId', 'Valid Skill ID is required').isMongoId(),
+      validateJWT,
       validateFields
    ],
   skillController.deleteSkill

@@ -34,8 +34,7 @@ export const saveExperience = async (req, res) => {
 export const getExperiences = async (req, res) => {
     try {
         const experiences = await Experience.find()
-            .populate("user")
-            .populate("company", "name");
+            .populate("user");
 
         res.status(200).json({
             success: true,

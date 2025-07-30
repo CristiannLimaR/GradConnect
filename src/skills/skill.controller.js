@@ -3,18 +3,18 @@ import Skill from "./skill.model.js";
 // Create Skill
 export const createSkill = async (req, res) => {
   try {
-    const { nameSkill, levelSkill, userId } = req.body;
+    const { nameSkill, levelSkill } = req.body;
 
-    if (!nameSkill || !userId) {
+    if (!nameSkill) {
       return res
         .status(400)
-        .json({ message: "nameSkill and userId are required" });
+        .json({ message: "nameSkill is required" });
     }
 
     const newSkill = new Skill({
       nameSkill,
       levelSkill, // El valor predeterminado será 'PRINCIPIANTE' si no se proporciona, según el esquema
-      userId,
+      userId: req.user._id,
     });
 
     const savedSkill = await newSkill.save();

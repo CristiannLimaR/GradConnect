@@ -14,9 +14,9 @@ const experienceSchema = new Schema(
         maxLength: 100,
        },
        company: {
-        type: Schema.Types.ObjectId,
-        ref: 'Company',
-        required: true,
+        type: String,
+        required: [true, "Company is required"],
+        maxLength: 100,
        },
        startDate: {
         type: Date,
