@@ -1,19 +1,24 @@
+import JobApplication from './jobApplication.model.js';
+import wOffer from '../workOffer/wOffer.model.js';
+
+// Crear nueva postulación
 export const createJobApplication = async (req, res) => {
   try {
     const { ofertaId, mensajeCandidato } = req.body;
 
-    if (!req.file) {
-      return res.status(400).json({ error: 'Debe adjuntar un CV' });
-    }
-
     const nuevaSolicitud = new JobApplication({
       usuarioId: req.user._id,
       ofertaId,
-      mensajeCandidato,
-      cvAdjunto: req.file.path
+      mensajeCandidato
     });
 
     await nuevaSolicitud.save();
+
+// Agregar el usuario al array de applications en wOffer
+    await wOffer.findByIdAndUpdate(ofertaId, {
+      $addToSet: { applications: req.user._id }
+    });
+
     res.status(201).json({
       message: 'Solicitud creada con éxito',
       solicitud: nuevaSolicitud
@@ -23,6 +28,7 @@ export const createJobApplication = async (req, res) => {
   }
 };
 
+// Obtener todas las postulaciones
 export const getAllApplications = async (req, res) => {
   try {
     const solicitudes = await JobApplication.find();
@@ -32,6 +38,7 @@ export const getAllApplications = async (req, res) => {
   }
 };
 
+// Obtener una postulación por ID
 export const getApplicationById = async (req, res) => {
   try {
     const solicitud = await JobApplication.findById(req.params.id);
@@ -44,6 +51,7 @@ export const getApplicationById = async (req, res) => {
   }
 };
 
+// Actualizar el estado de una postulación (aceptado, rechazado, etc.)
 export const updateApplicationStatus = async (req, res) => {
   try {
     const { estado } = req.body;

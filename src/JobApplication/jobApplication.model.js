@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const autopopulate = require('mongoose-autopopulate');
+import mongoose from 'mongoose';
+import autopopulate from 'mongoose-autopopulate';
 
 const jobApplicationSchema = new mongoose.Schema({
   usuarioId: {
@@ -8,12 +8,13 @@ const jobApplicationSchema = new mongoose.Schema({
     required: true,
     autopopulate: true
   },
-  ofertaId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'JobOffer',
-    required: true,
-    autopopulate: true
-  },
+ofertaId: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: 'wOffer', // ✅ Coincide con el modelo exportado
+  required: true,
+  autopopulate: true
+}
+,
   fechaPostulacion: {
     type: Date,
     default: Date.now
@@ -23,10 +24,6 @@ const jobApplicationSchema = new mongoose.Schema({
     enum: ['pendiente', 'aceptado', 'rechazado'],
     default: 'pendiente'
   },
-  cvAdjunto: {
-    type: String,
-    required: true
-  },
   mensajeCandidato: {
     type: String
   }
@@ -34,4 +31,4 @@ const jobApplicationSchema = new mongoose.Schema({
 
 jobApplicationSchema.plugin(autopopulate);
 
-module.exports = mongoose.model('JobApplication', jobApplicationSchema);
+export default mongoose.model('JobApplication', jobApplicationSchema);
