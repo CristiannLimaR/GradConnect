@@ -22,6 +22,10 @@ router.post(
 // Route to get all skills for a specific user
 // GET /api/skills/user/:userId
 router.get(
+  "/all", skillController.getAllSkills
+)
+
+router.get(
   "/user/:userId",
    [
       validateJWT,
@@ -41,6 +45,8 @@ router.get(
    ],
   skillController.getSkillById
 );
+
+
 
 // Route to update a skill by its ID
 // PUT /api/skills/:skillId

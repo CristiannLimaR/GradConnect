@@ -6,9 +6,7 @@ export const createSkill = async (req, res) => {
     const { nameSkill, levelSkill } = req.body;
 
     if (!nameSkill) {
-      return res
-        .status(400)
-        .json({ message: "nameSkill is required" });
+      return res.status(400).json({ message: "nameSkill is required" });
     }
 
     const newSkill = new Skill({
@@ -19,7 +17,7 @@ export const createSkill = async (req, res) => {
 
     const savedSkill = await newSkill.save();
     res.status(201).json(savedSkill);
-    } catch (error) {
+  } catch (error) {
     if (error.name === "ValidationError") {
       return res.status(400).json({ message: error.message });
     }
