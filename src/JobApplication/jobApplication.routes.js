@@ -3,7 +3,8 @@ import {
   createJobApplication,
   getAllApplications,
   getApplicationById,
-  updateApplicationStatus
+  updateApplicationStatus,
+  getApplicationsByUser
 } from './jobApplication.controller.js';
 import {validateJWT} from '../middlewares/validate-jwt.js';
 import { haveRol } from '../middlewares/validate-role.js';
@@ -19,7 +20,12 @@ router.post(
 );
 
 router.get('/', getAllApplications);
+router.get(
+  '/usuario',
+  validateJWT,
+  haveRol('CANDIDATE'),
+  getApplicationsByUser
+);
 router.get('/:id', getApplicationById);
 router.patch('/:id/estado', validateJWT, haveRol('CANDIDATE', 'ADMIN'), updateApplicationStatus);
-
 export default router;

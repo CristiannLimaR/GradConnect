@@ -8,12 +8,13 @@ const jobApplicationSchema = new mongoose.Schema({
     required: true,
     autopopulate: true
   },
-  ofertaId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'JobOffer',
-    required: true,
-    autopopulate: true
-  },
+ofertaId: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: 'wOffer', 
+  required: true,
+  autopopulate: true
+}
+,
   fechaPostulacion: {
     type: Date,
     default: Date.now
