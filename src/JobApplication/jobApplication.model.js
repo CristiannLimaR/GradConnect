@@ -10,7 +10,7 @@ const jobApplicationSchema = new mongoose.Schema({
   },
 ofertaId: {
   type: mongoose.Schema.Types.ObjectId,
-  ref: 'wOffer', // ✅ Coincide con el modelo exportado
+  ref: 'wOffer', 
   required: true,
   autopopulate: true
 }

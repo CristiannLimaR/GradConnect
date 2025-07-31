@@ -35,6 +35,10 @@ export const updateUser = async (req, res = response) => {
       data.password = await hash(password);
     }
 
+    if (req.file) {
+      data.cvAdjunto = req.file.path;
+    }
+
     const updatedUser = await User.findByIdAndUpdate(id, data, { new: true });
 
     res.status(200).json({
