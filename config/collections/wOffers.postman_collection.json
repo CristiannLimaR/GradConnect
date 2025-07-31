@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "607f8e57-8a5c-46e2-83ad-89378f678862",
+		"name": "wOffers",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42040033",
+		"_collection_link": "https://www.postman.com/cristian-2488/workspace/hotel-manager/collection/42040033-607f8e57-8a5c-46e2-83ad-89378f678862?action=share&source=collection_link&creator=42040033"
+	},
+	"item": [
+		{
+			"name": "Save",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Profesor de Psicología\",\r\n  \"description\": \"Responsable de dar clases de psicologia\",\r\n  \"company\": \"Kinal S.A.\",\r\n  \"location\": \"Presencial\",\r\n  \"modality\": \"Tiempo Completo\",\r\n  \"salary\": 8000,\r\n  \"ubication\": \"Ciudad de Guatemala\",\r\n  \"requirements\": [\"Node.js\", \"MongoDB\", \"Git\"],\r\n  \"closingDate\": \"01/08/2025\",\r\n  \"skills\": [\"665f70d0a7ad35481a36f151\", \"665f70d0a7ad35481a36f152\"],\r\n  \"applications\": [\"665f70d0a7ad35481a36f199\"]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/gradConnect/v1/wOffer/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"gradConnect",
+						"v1",
+						"wOffer",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/gradConnect/v1/wOffer/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"gradConnect",
+						"v1",
+						"wOffer",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/gradConnect/v1/wOffer/search/685896742008c8ea3a8dd58f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"gradConnect",
+						"v1",
+						"wOffer",
+						"search",
+						"685896742008c8ea3a8dd58f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Profesor de Taller PERO EDITADOOO\",\r\n  \"description\": \"Responsable de dar clases de programación.\",\r\n  \"company\": \"Kinal S.A.\",\r\n  \"location\": \"Presencial\",\r\n  \"modality\": \"Tiempo Completo\",\r\n  \"salary\": 8000,\r\n  \"ubication\": \"Ciudad de Guatemala\",\r\n  \"requirements\": [\"Node.js\", \"MongoDB\", \"Git\"],\r\n  \"closingDate\": \"01/08/2025\",\r\n  \"skills\": [\"665f70d0a7ad35481a36f151\", \"665f70d0a7ad35481a36f152\"],\r\n  \"applications\": [\"665f70d0a7ad35481a36f199\"]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/gradConnect/v1/wOffer/update/68588b4dc141d507cff071c0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"gradConnect",
+						"v1",
+						"wOffer",
+						"update",
+						"68588b4dc141d507cff071c0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/gradConnect/v1/wOffer/delete/68589ba9f1a8078f6764202d",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"gradConnect",
+						"v1",
+						"wOffer",
+						"delete",
+						"68589ba9f1a8078f6764202d"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

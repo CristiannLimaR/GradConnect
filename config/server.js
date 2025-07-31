@@ -3,10 +3,14 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import { dbConnection } from "./mongo.js";
-
-import userRoutes from '../src/users/user.routes.js';
-import authRoutes from '../src/auth/auth.routes.js';
+import userRoutes from "../src/users/user.routes.js";
+import authRoutes from "../src/auth/auth.routes.js";
+import wOfferRoutes from "../src/workOffer/wOffer.routes.js";
+import experienRoutes from '../src/experience/experience.routes.js';
+import educationRoutes from '../src/education/education.routes.js';
 import jobApplicationRoutes from '../src/JobApplication/jobApplication.routes.js';
+import enterpriseRoutes from '../src/enterprise/enterprise.routes.js';
+import skillRoutes from '../src/skills/skill.routes.js';
 
 const middlewares = (app) => {
   app.use(express.urlencoded({ extended: false }));
@@ -19,7 +23,12 @@ const middlewares = (app) => {
 const routes = (app) => {
   app.use("/gradConnect/v1/auth", authRoutes);
   app.use("/gradConnect/v1/user", userRoutes);
+  app.use("/gradConnect/v1/wOffer", wOfferRoutes);
+  app.use("/gradConnect/v1/experience", experienRoutes);
   app.use("/gradConnect/v1/solicitudes", jobApplicationRoutes);
+  app.use("/gradConnect/v1/education", educationRoutes);
+  app.use("/gradConnect/v1/enterprise", enterpriseRoutes);
+  app.use("/gradConnect/v1/skills", skillRoutes);
 };
 
 const conectarDb = async () => {
@@ -33,41 +42,23 @@ const conectarDb = async () => {
 
 export const initServer = () => {
   const app = express();
-  const port = process.env.PORT || 3002;
+  const port = process.env.PORT || 3000;
 
   middlewares(app);
   routes(app);
   conectarDb();
+
+  // Middleware global de manejo de errores
+  app.use((err, req, res, next) => {
+    console.error('Error:', err); // Muestra el error completo en consola
+    res.status(500).json({
+      error: err.message || err.toString(),
+      details: err.stack || err
+    });
+  });
 
   app.listen(port, () => {
     console.log(`🚀 Server running on port ${port}`);
   });
 };
 
-// const crearAdmin = async () => {
-//   try {
-//     const existingAdmin = await User.findOne({ username: "ADMINB" });
-
-//     if (!existingAdmin) {
-//       const hashedPassword = await hash("ADMINB");
-
-//       const admin = await User.create({
-//         name: "Default Admin",
-//         username: "ADMINB",
-//         dpi: 1234567890,
-//         address: "Admin HQ",
-//         phone: 1234567890,
-//         email: "adminb@adminb.com",
-//         password: hashedPassword,
-//         monthlyIncome: 999999,
-//         role: "ADMIN_ROLE",
-//       });
-
-//       console.log("✅ Admin creado correctamente:", admin.username);
-//     } else {
-//       console.log("ℹ️ Admin ya existe");
-//     }
-//   } catch (error) {
-//     console.error(`❌ Error al crear admin: ${error.message}`);
-//   }
-// };
