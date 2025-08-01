@@ -1,4 +1,5 @@
 import Enterprise from "./enterprise.model.js";
+import User from "../users/user.model.js";
 
 export const saveEnterprise = async (req, res) => {
   try {
@@ -16,13 +17,28 @@ export const saveEnterprise = async (req, res) => {
       type: data.type,
       size: data.size,
     });
+    
 
-    const recruiters = Array.isArray(data.recruiters)
+    const recruiterEmails = Array.isArray(data.recruiters)
       ? data.recruiters
       : [data.recruiters];
-    if (recruiters.length > 0) {
-      enterprise.recruiters.push(...recruiters);
+
+    if (recruiterEmails.length > 0) {
+      const users = await User.find({ email: { $in: recruiterEmails } });
+
+      if (users.length !== recruiterEmails.length) {
+        const foundEmails = users.map((u) => u.email);
+        const notFound = recruiterEmails.filter((e) => !foundEmails.includes(e));
+        return res.status(404).json({
+          msg: "Algunos correos de reclutadores no fueron encontrados.",
+          notFound,
+        });
+      }
+
+      const recruiterIds = users.map((user) => user._id);
+      enterprise.recruiters.push(...recruiterIds);
     }
+
 
     if (data.socialMediaLinks) {
       const links = Array.isArray(data.socialMediaLinks)
@@ -277,15 +293,15 @@ export const removeSocialMediaLinks = async (req, res) => {
 export const getEnterpriseByRecruiter = async (req, res) => {
   try {
     const { recruiterId } = req.params;
-    const enterprises = await Enterprise.find({ recruiters: recruiterId });
-    if (!enterprises || enterprises.length === 0) {
+    const enterprise = await Enterprise.findOne({ recruiters: recruiterId });
+    if (!enterprise || enterprise.length === 0) {
       return res.status(404).json({
         msg: "No enterprises found for this recruiter.",
       });
     }
     res.status(200).json({
       msg: "Enterprises found for recruiter.",
-      enterprises,
+      enterprise,
     });
   } catch (e) {
     res.status(500).json({

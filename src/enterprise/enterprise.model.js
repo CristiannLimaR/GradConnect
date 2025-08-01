@@ -14,7 +14,6 @@ const enterpriseSchema = new Schema(
     },
     logo: {
       type: String,
-      required: true,
     },
     webSite: {
       type: String,

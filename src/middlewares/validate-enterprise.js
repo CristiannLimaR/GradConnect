@@ -4,9 +4,9 @@ import User from "../users/user.model.js";
 export const canSaveEnterprise = (req, res, next) => {
     
 
-    const { name, address, contactNumber, email, type, size, recruiters, industry, logo, description } = req.body;
+    const { name, address, contactNumber, email, type, size, recruiters, industry,  description } = req.body;
 
-    if (!name || !address || !contactNumber || !email || !type || !size || !recruiters || !industry || !logo || !description) {
+    if (!name || !address || !contactNumber || !email || !type || !size || !recruiters || !industry  || !description) {
         return res.status(400).json({
             success: false,
             msg: "All fields are required to create an enterprise."
