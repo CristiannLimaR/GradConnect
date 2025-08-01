@@ -3,11 +3,19 @@ import Enterprise from "./enterprise.model.js";
 export const saveEnterprise = async (req, res) => {
   try {
     const data = req.body;
+    console.log("Archivo recibido:", req.file);
+    console.log("Campos del body:", Object.keys(req.body));
+    console.log("Headers:", req.headers);
+
+    let logoUrl = data.logo;
+    if (req.file && req.file.path) {
+      logoUrl = req.file.path;
+    }
 
     const enterprise = new Enterprise({
       name: data.name,
       description: data.description,
-      logo: data.logo,
+      logo: logoUrl,
       webSite: data.webSite,
       address: data.address,
       industry: data.industry,

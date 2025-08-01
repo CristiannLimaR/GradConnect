@@ -3,9 +3,19 @@ import { saveEnterprise, getEnterprises, getEnterpriseById, updateEnterprise, de
 import { canSaveEnterprise, canGetEnterprises, canGetEnterpriseById, canUpdateEnterprise, canDeleteEnterprise } from "../middlewares/validate-enterprise.js";
 import { validateJWT } from "../middlewares/validate-jwt.js";
 import { haveRol } from "../middlewares/validate-role.js";
+import { uploadProfileImage } from "../middlewares/upload.js";
 
 const router = Router();
 
+// Ruta para crear empresa durante el registro (sin autenticación)
+router.post(
+  "/register",
+  uploadProfileImage.single('logo'),
+  canSaveEnterprise,
+  saveEnterprise
+);
+
+// Ruta existente para crear empresa (con autenticación)
 router.post(
   "/",
   validateJWT,
