@@ -100,18 +100,29 @@ export const updateEnterprise = async (req, res) => {
     const { id } = req.params;
     const data = req.body;
 
-    
+    if (data.socialMediaLinks && !Array.isArray(data.socialMediaLinks)) {
+      data.socialMediaLinks = [data.socialMediaLinks];
+    }
+
     if (data.recruiters) {
-      Array.isArray(data.recruiters)
+      const recruiterEmails = Array.isArray(data.recruiters)
         ? data.recruiters
         : [data.recruiters];
-    }
-    
-    
-    if (data.socialMediaLinks) {
-      Array.isArray(data.socialMediaLinks)
-        ? data.socialMediaLinks
-        : [data.socialMediaLinks];
+
+      const users = await User.find({ email: { $in: recruiterEmails } });
+
+      if (users.length !== recruiterEmails.length) {
+        const foundEmails = users.map((u) => u.email);
+        const notFound = recruiterEmails.filter(
+          (e) => !foundEmails.includes(e)
+        );
+        return res.status(404).json({
+          msg: "Algunos correos de reclutadores no fueron encontrados.",
+          notFound,
+        });
+      }
+
+      data.recruiters = users.map((user) => user._id);
     }
 
     const updatedEnterprise = await Enterprise.findByIdAndUpdate(id, data, {
