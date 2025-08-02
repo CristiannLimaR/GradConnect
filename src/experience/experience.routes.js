@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { saveExperience, getExperiences, updateExperience, deleteExperience } from "./experience.controller.js";
+import { saveExperience, getExperiences, updateExperience, deleteExperience, getExperiencesByUserId } from "./experience.controller.js";
 import { validarCampos } from "../middlewares/validar-campos.js";
 import { validateJWT } from "../middlewares/validate-jwt.js";
 
@@ -15,7 +15,14 @@ router.post(
 
 router.get(
     "/",
+    validateJWT,
     getExperiences
+)
+
+router.get(
+    "/user/:userId",
+    validateJWT,
+    getExperiencesByUserId
 )
 
 router.put(

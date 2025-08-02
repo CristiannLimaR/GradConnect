@@ -46,12 +46,13 @@ const wOfferSchema = new Schema(
     skills: {
       type: [Schema.Types.ObjectId],
       ref: "Skill",
+      autopopulate: true,
       required: true,
     },
     applications: [
       {
         type: Schema.Types.ObjectId,
-        ref: "User",
+        ref: "JobApplication",
         autopopulate: true,
       },
     ],

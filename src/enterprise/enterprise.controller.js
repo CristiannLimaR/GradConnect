@@ -1,12 +1,13 @@
 import Enterprise from "./enterprise.model.js";
+import User from "../users/user.model.js";
+import wOffer from "../workOffer/wOffer.model.js";
+import JobApplication from "../JobApplication/jobApplication.model.js";
+import Message from "../messages/message.model.js";
 
 export const saveEnterprise = async (req, res) => {
   try {
     const data = req.body;
-    console.log("Archivo recibido:", req.file);
-    console.log("Campos del body:", Object.keys(req.body));
-    console.log("Headers:", req.headers);
-
+    
     let logoUrl = data.logo;
     if (req.file && req.file.path) {
       logoUrl = req.file.path;
@@ -24,13 +25,29 @@ export const saveEnterprise = async (req, res) => {
       type: data.type,
       size: data.size,
     });
+    
 
-    const recruiters = Array.isArray(data.recruiters)
-      ? data.recruiters
-      : [data.recruiters];
-    if (recruiters.length > 0) {
-      enterprise.recruiters.push(...recruiters);
+    // Only process recruiters if the field is provided and not empty
+    if (data.recruiters && data.recruiters.trim() !== "") {
+      const recruiterEmails = data.recruiters.split(",").map(email => email.trim()).filter(email => email !== "");
+
+      if (recruiterEmails.length > 0) {
+        const users = await User.find({ email: { $in: recruiterEmails } });
+
+        if (users.length !== recruiterEmails.length) {
+          const foundEmails = users.map((u) => u.email);
+          const notFound = recruiterEmails.filter((e) => !foundEmails.includes(e));
+          return res.status(404).json({
+            msg: "Algunos correos de reclutadores no fueron encontrados.",
+            notFound,
+          });
+        }
+
+        const recruiterIds = users.map((user) => user._id);
+        enterprise.recruiters.push(...recruiterIds);
+      }
     }
+
 
     if (data.socialMediaLinks) {
       const links = Array.isArray(data.socialMediaLinks)
@@ -320,6 +337,39 @@ export const getEnterpriseRecruiters = async (req, res) => {
     res.status(500).json({
       msg: "Error fetching enterprise recruiters.",
       error: e.message,
+    });
+  }
+};
+
+
+export const getEnterpriseStats = async (req, res) => {
+  try {
+    const { enterpriseId } = req.params;
+
+    const ofertas = await wOffer.find({ enterprise: enterpriseId });
+    const totalOfertas = ofertas.length;
+    const offerIds = ofertas.map(o => o._id);
+    const aplicaciones = await JobApplication.find({ ofertaId: { $in: offerIds } });
+    const totalCandidatos = aplicaciones.length;
+    const mensajesNoLeidos = await Message.countDocuments({ receiver: enterpriseId, receiverModel: 'Enterprise', isRead: false });
+    const ofertasActivas = ofertas.filter(o => o.status === true).length;
+    const sieteDias = new Date();
+    sieteDias.setDate(sieteDias.getDate() - 7);
+    const candidatosRecientes = aplicaciones.filter(a => a.fechaPostulacion >= sieteDias).length;
+    const mensajesTotales = await Message.countDocuments({ sender: enterpriseId, senderModel: 'Enterprise' });
+    const tasaRespuesta = totalCandidatos > 0 ? Math.round((mensajesTotales / totalCandidatos) * 100) : 0;
+    res.json({
+      totalOfertas,
+      totalCandidatos,
+      mensajesNoLeidos,
+      ofertasActivas,
+      candidatosRecientes,
+      tasaRespuesta
+    });
+  } catch (error) {
+    res.status(500).json({
+      msg: 'Error obteniendo estadísticas de la empresa',
+      error: error.message
     });
   }
 };

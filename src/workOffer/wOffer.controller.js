@@ -142,6 +142,7 @@ export const updateWOffer = async (req, res) => {
       closingDate,
       skills,
       applications,
+      status,
     } = req.body;
 
     // Detectar y convertir fecha en formato dd/mm/yyyy
@@ -164,6 +165,7 @@ export const updateWOffer = async (req, res) => {
         closingDate,
         skills,
         applications,
+        status
       },
       { new: true }
     );
@@ -225,7 +227,6 @@ export const getOffersByEnterprise = async (req, res) => {
     const offers = await wOffer
       .find({
         enterprise: enterpriseId,
-        status: true,
       })
       .populate("enterprise", "name"); // solo después del filtro
 

@@ -14,7 +14,6 @@ const enterpriseSchema = new Schema(
     },
     logo: {
       type: String,
-      required: true,
     },
     webSite: {
       type: String,
@@ -70,7 +69,6 @@ const enterpriseSchema = new Schema(
       {
         type: Schema.Types.ObjectId,
         ref: "User",
-        required: true,
         autopopulate: true,
       },
     ],

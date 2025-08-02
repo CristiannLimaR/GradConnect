@@ -48,6 +48,15 @@ const userSchema = new Schema(
       type: String,
       trim: true
     },
+    github: {
+      type: String,
+      trim: true
+    },
+    descripcion: {
+      type: String,
+      trim: true,
+      maxLength: 500
+    },
     registrationDate: {
       type: Date,
       default: Date.now
@@ -56,6 +65,24 @@ const userSchema = new Schema(
       type: String,
       trim: true
     },
+    skills: [
+      {
+        skillId: {
+          type: Schema.Types.ObjectId,
+          ref: 'Skill',
+          required: true
+        },
+        levelSkill: {
+          type: String,
+          enum: ["BEGINNER", "INTERMEDIATE", "ADVANCED"],
+          default: "BEGINNER"
+        },
+        addedAt: {
+          type: Date,
+          default: Date.now
+        }
+      }
+    ],
     status: {
       type: Boolean,
       default: true

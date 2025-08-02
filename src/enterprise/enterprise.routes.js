@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { saveEnterprise, getEnterprises, getEnterpriseById, updateEnterprise, deleteEnterprise, addEnterpriseRecruiters, addSocialMediaLinks, getEnterpriseByRecruiter, getEnterpriseRecruiters, removeEnterpriseRecruiters, removeSocialMediaLinks } from "./enterprise.controller.js";
+import { saveEnterprise, getEnterprises, getEnterpriseById, updateEnterprise, deleteEnterprise, addEnterpriseRecruiters, addSocialMediaLinks, getEnterpriseByRecruiter, getEnterpriseRecruiters, removeEnterpriseRecruiters, removeSocialMediaLinks, getEnterpriseStats } from "./enterprise.controller.js";
 import { canSaveEnterprise, canGetEnterprises, canGetEnterpriseById, canUpdateEnterprise, canDeleteEnterprise } from "../middlewares/validate-enterprise.js";
 import { validateJWT } from "../middlewares/validate-jwt.js";
 import { haveRol } from "../middlewares/validate-role.js";
@@ -19,7 +19,7 @@ router.post(
 router.post(
   "/",
   validateJWT,
-  haveRol("RECRUITER", "GRADCONNECT"),
+  uploadProfileImage.single('logo'),
   canSaveEnterprise,
   saveEnterprise
 );
@@ -39,6 +39,13 @@ router.get(
   haveRol("RECRUITER", "GRADCONNECT"),
   getEnterpriseByRecruiter
 );
+router.get(
+  "/:enterpriseId/stats",
+  validateJWT,
+  haveRol("ENTERPRISE", "RECRUITER", "GRADCONNECT"),
+  getEnterpriseStats
+);
+
 router.get(
   "/:id/recruiters",
   validateJWT,

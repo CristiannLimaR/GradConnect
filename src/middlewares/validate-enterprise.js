@@ -3,13 +3,29 @@ import User from "../users/user.model.js";
 
 export const canSaveEnterprise = (req, res, next) => {
     
+    console.log('=== ENTERPRISE VALIDATION DEBUG ===');
+    console.log('Request body:', JSON.stringify(req.body, null, 2));
+    console.log('Request file:', req.file);
+    console.log('======================================');
+    
+    const { name, address, contactNumber, email, type, size, industry, description } = req.body;
 
-    const { name, address, contactNumber, email, type, size, recruiters, industry, description } = req.body;
+    // Debug: Check each field individually
+    const missingFields = [];
+    if (!name) missingFields.push('name');
+    if (!address) missingFields.push('address');
+    if (!contactNumber) missingFields.push('contactNumber');
+    if (!email) missingFields.push('email');
+    if (!type) missingFields.push('type');
+    if (!size) missingFields.push('size');
+    if (!industry) missingFields.push('industry');
+    if (!description) missingFields.push('description');
 
-    if (!name || !address || !contactNumber || !email || !type || !size || !recruiters || !industry || !description) {
+    if (missingFields.length > 0) {
+        console.log('Missing fields:', missingFields);
         return res.status(400).json({
             success: false,
-            msg: "All fields are required to create an enterprise."
+            msg: `Missing required fields: ${missingFields.join(', ')}`
         });
     }
 

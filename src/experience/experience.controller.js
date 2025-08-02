@@ -33,8 +33,7 @@ export const saveExperience = async (req, res) => {
 
 export const getExperiences = async (req, res) => {
     try {
-        const experiences = await Experience.find()
-            .populate("user");
+        const experiences = await Experience.find({user: req.user._id})
 
         res.status(200).json({
             success: true,
@@ -101,6 +100,27 @@ export const deleteExperience = async (req, res) => {
             success: false,
             msg: "Error deleting experience",
             error: error.message,
+        });
+    }
+};
+
+// Get experience data for a specific user by userId (for viewing other users' profiles)
+export const getExperiencesByUserId = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const experiences = await Experience.find({ user: userId });
+
+        res.status(200).json({
+            success: true,
+            msg: "Experiences retrieved successfully",
+            experiences
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            msg: "Error retrieving experiences",
+            error: error.message
         });
     }
 };

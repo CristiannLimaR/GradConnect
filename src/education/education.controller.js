@@ -97,6 +97,23 @@ export const deleteEducation = async (req, res) => {
     }
 };
 
+// Get education data for a specific user by userId (for viewing other users' profiles)
+export const getEducationsByUserId = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const educations = await Education.find({ user: userId });
 
+        res.status(200).json({
+            success: true,
+            msg: 'Educación obtenida exitosamente',
+            educations
+        });
 
-
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            msg: 'Error al obtener la educación',
+            error: error.message
+        });
+    }
+};

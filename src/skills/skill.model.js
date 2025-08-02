@@ -1,5 +1,4 @@
 import { Schema, model } from 'mongoose';
-import autopopulate from 'mongoose-autopopulate';
 
 const skillSchema = new Schema(
     {
@@ -7,18 +6,18 @@ const skillSchema = new Schema(
             type: String,
             required: [true, "Skill name is required"],
             trim: true,
-            maxLength: 100
+            maxLength: 100,
+            unique: true
         },
         levelSkill: {
             type: String,
             enum: ["BEGINNER", "INTERMEDIATE", "ADVANCED"],
             default: "BEGINNER"
         },
-        userId: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-            required: true,
-            autopopulate: true
+        category: {
+            type: String,
+            enum: ["TECHNICAL", "ARCHITECTURE", "FINANCE", "SALES", "HEALTH", "OTHER"],
+            default: "TECHNICAL"
         },
         status:{
             type: Boolean,
@@ -30,7 +29,5 @@ const skillSchema = new Schema(
         versionKey: false
     }
 )
-
-skillSchema.plugin(autopopulate);
 
 export default model('Skill', skillSchema);
